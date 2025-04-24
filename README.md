@@ -29,53 +29,53 @@ yarn add localforage-node-localstorage-driver
 
 ## Basic Usage ##
 
-### Registering the Driver and Creating an Instance ###
+### Registering the Driver and creating an Instance ###
 
 ```typescript
-import localforage from 'localforage';
-import { defineDriver, createInstance, NODE_LOCALSTORAGE } from 'localforage-node-localstorage-driver';
+import localforage from 'localforage'
+import { defineDriver, createInstance, NodeLocalStorageDriver } from 'localforage-node-localstorage-driver'
 
-// First, define the driver (do this once in your application)
+// first, define the driver (do this once in your application)
 async function setup() {
-  // Register the driver
-  await defineDriver();
+  // register the driver
+  await defineDriver()
   
-  // Create a LocalForage instance that uses the node-localstorage driver
-  const store = createInstance({
-    name: 'myApp',
-    storeName: 'myStore'
-  });
+  // create a LocalForage instance that uses the node-localstorage driver
+  const Store = createInstance({
+    Name:     'myApp',
+    StoreName:'myStore'
+  })
   
-  // Now you can use all LocalForage methods
-  await store.setItem('user', { id: 1, name: 'John' });
-  const user = await store.getItem('user');
-  console.log(user); // { id: 1, name: 'John' }
+  // now you can use all LocalForage methods
+  await Store.setItem('user', { Id:1, Name:'John' })
+  const User = await Store.getItem('User')
+  console.log(User) // { Id:1, Name:'John' }
 }
 
-setup();
+setup()
 ```
 
-### Using With Existing LocalForage Instance ###
+### Using with existing LocalForage Instance ###
 
 If you already have a LocalForage instance and want to add this driver to it:
 
 ```typescript
-import localforage from 'localforage';
-import { defineDriver, NODE_LOCALSTORAGE } from 'localforage-node-localstorage-driver';
+import localforage from 'localforage'
+import { defineDriver, NodeLocalStorageDriver } from 'localforage-node-localstorage-driver'
 
 async function setupWithExistingInstance() {
-  // Register the driver
-  await defineDriver();
+  // register the driver
+  await defineDriver()
   
-  // Configure LocalForage to use node-localstorage driver
+  // configure LocalForage to use node-localstorage driver
   localforage.config({
-    driver: NODE_LOCALSTORAGE,
-    name: 'myApp',
-    storeName: 'myStore'
+    Driver:    NodeLocalStorageDriver,
+    Name:     'myApp',
+    StoreName:'myStore'
   });
   
-  // Now you can use LocalForage as usual
-  await localforage.setItem('key', 'value');
+  // now you can use LocalForage as usual
+  await localforage.setItem('key','value')
 }
 ```
 
@@ -84,16 +84,16 @@ async function setupWithExistingInstance() {
 The driver supports the standard LocalForage configuration options plus additional options specific to the node-localstorage driver:
 
 ```typescript
-const store = createInstance({
-  // Standard LocalForage options
-  name: 'myApp',
-  storeName: 'myStore',
-  description: 'My Application Store',
+const Store = createInstance({
+  // standard LocalForage options
+  Name:       'myApp',
+  StoreName:  'myStore',
+  Description:'My Application Store',
   
   // node-localstorage specific options
-  storagePath: './custom-storage-path', // Custom path for storing data (default: './.localforage')
-  size: 10 * 1024 * 1024 // Custom size limit in bytes (default: 5MB)
-});
+  StoragePath: './custom-storage-path', // custom path for storing data (default: './.localforage')
+  Size: 10 * 1024 * 1024 // Custom size limit in bytes (default: 50MB)
+})
 ```
 
 ### Storage Location ###
@@ -106,69 +106,69 @@ This driver supports all the standard LocalForage methods:
 
 ### Core Methods ###
 
-- `setItem(key, value)`: Stores data in the storage.
-- `getItem(key)`: Retrieves data from the storage.
-- `removeItem(key)`: Removes an item from the storage.
-- `clear()`: Removes all items from the storage.
-- `length()`: Gets the number of items in the storage.
-- `key(index)`: Gets the name of the key at the provided index.
-- `keys()`: Gets the list of all keys in the storage.
-- `iterate(iteratorCallback)`: Iterates through each value in the storage.
+- `setItem(key,value)`: stores data in the storage
+- `getItem(key)`: retrieves data from the storage
+- `removeItem(key)`: removes an item from the storage
+- `clear()`: removes all items from the storage
+- `length()`: gets the number of items in the storage
+- `key(index)`: gets the name of the key at the provided index
+- `keys()`: gets the list of all keys in the storage
+- `iterate(iteratorCallback)`: iterates through each value in the storage
 
 ### Driver-specific Exports ###
 
-- `defineDriver()`: Registers the Node.js localStorage driver with LocalForage.
-- `createInstance(options)`: Creates a new LocalForage instance using the Node.js localStorage driver.
-- `NODE_LOCALSTORAGE`: The driver name constant to use when manually configuring LocalForage.
+- `defineDriver()`: registers the Node.js localStorage driver with LocalForage
+- `createInstance(options)`: creates a new LocalForage instance using the Node.js localStorage driver
+- `NodeLocalStorageDriver`: the driver name constant to use when manually configuring LocalForage
 
 ## Examples ##
 
-### Storing and Retrieving Complex Data ###
+### Storing and retrieving complex Data ###
 
 ```typescript
-import { createInstance } from 'localforage-node-localstorage-driver';
+import { createInstance } from 'localforage-node-localstorage-driver'
 
 async function manageUserPreferences() {
-  const store = createInstance({ name: 'preferences' });
+  const Store = createInstance({ Name:'preferences' })
   
-  // Store complex object
-  await store.setItem('userPreferences', {
-    theme: 'dark',
-    notifications: {
-      email: true,
-      push: false
+  // store complex object
+  await Store.setItem('UserPreferences', {
+    Theme: 'dark',
+    Notifications: {
+      EMail:true,
+      Push: false
     },
-    recentSearches: ['node.js', 'localstorage', 'persistent storage']
+    recentSearches: ['node.js','localstorage','persistent storage']
   });
   
-  // Later, retrieve it
-  const preferences = await store.getItem('userPreferences');
-  console.log(preferences.theme); // 'dark'
+  // later, retrieve it
+  const Preferences = await Store.getItem('UserPreferences')
+  console.log(Preferences.Theme) // 'dark'
 }
 ```
 
-### Iterating Through All Items ###
+### iterating through all Items ###
 
 ```typescript
-import { createInstance } from 'localforage-node-localstorage-driver';
+import { createInstance } from 'localforage-node-localstorage-driver'
 
 async function processAllItems() {
-  const store = createInstance();
+  const Store = createInstance()
   
-  // First add some items
-  await store.setItem('item1', { value: 'first' });
-  await store.setItem('item2', { value: 'second' });
-  await store.setItem('item3', { value: 'third' });
+  // first add some items
+  await Store.setItem('Item1', { Value:'first' })
+  await Store.setItem('Item2', { Value:'second' })
+  await Store.setItem('Item3', { Value:'third' })
   
-  // Now iterate through all items
-  await store.iterate((value, key, iterationNumber) => {
-    console.log(`[${iterationNumber}] ${key}: ${JSON.stringify(value)}`);
+  // now iterate through all items
+  await Store.iterate((Value,Key,IterationNumber) => {
+    console.log(`[${IterationNumber}] ${Key}: ${JSON.stringify(Value)}`)
     
-    // If you want to stop iteration early, return any non-undefined value
-    if (key === 'item2') {
-      return true; // This will stop the iteration and return true
+    // if you want to stop iteration early, return any non-undefined value
+    if (Key === 'Item2') {
+      return true; // Tthis will stop the iteration and return true
     }
-  });
+  })
 }
 ```
 
