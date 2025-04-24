@@ -1,0 +1,56 @@
+{
+  "name": "localforage-node-localstorage-driver",
+  "version": "0.0.1",
+  "description": "a localForage driver for Node.js and Deno using node-localstorage",
+  "keywords": ["localforage", "node", "deno", "storage", "driver", "localStorage"],
+  "author": {
+    "name": "Andreas Rozek",
+    "url": "https://www.rozek.de"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/localforage-node-localstorage-driver.js",
+  "module": "./dist/localforage-node-localstorage-driver.js",
+  "types": "./dist/localforage-node-localstorage-driver.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/localforage-node-localstorage-driver.js",
+      "types": "./dist/localforage-node-localstorage-driver.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rozek/localforage-node-localstorage-driver"
+  },
+  "bugs": {
+    "url": "https://github.com/rozek/localforage-node-localstorage-driver/issues"
+  },
+  "homepage": "https://github.com/rozek/localforage-node-localstorage-driver#readme",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/rozek"
+  },
+  "dependencies": {
+    "@types/node-localstorage": "^1.3.2",
+    "localforage": "^1.10.0",
+    "node-localstorage": "^3.0.5"
+  },
+  "peerDependencies": {
+    "svelte": "^4.0.0",
+    "malinajs": "^0.7.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "vite": "^4.0.0",
+    "vitest": "^1.0.0"
+  }
+}
